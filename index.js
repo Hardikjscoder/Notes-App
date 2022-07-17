@@ -3,16 +3,12 @@ const desc_box = document.getElementById('desc_box')
 const add_btn = document.getElementById('add_note')
 const card_container = document.querySelector('.card-container')
 const clear_btn = document.getElementById('clear_note')
+const message = document.querySelector('.message')
 
 // Event Listeners
 add_btn.addEventListener('click', addNote)
 card_container.addEventListener('click', deleteNote)
 document.addEventListener('DOMContentLoaded', updateDOM)
-document.addEventListener('keydown', event => {
-    if (event.key === 'Enter') {
-        addNote()
-    }
-})
 clear_btn.addEventListener('click', clearNotes)
 
 // *********** Functions *********
@@ -43,8 +39,13 @@ function addNote() {
     card_delete_btn.style.padding = '.25rem'
     card_delete_btn.innerHTML = '<i class="fa-solid fa-trash"></i>'
     card_div.appendChild(card_delete_btn)
+
     // Append the card div in the cards container
     card_container.appendChild(card_div)
+
+    if (desc_box.value === '') {
+        card_container.removeChild(card_div)
+    }
 
     desc_box.value = ''
 }
@@ -76,6 +77,16 @@ function saveNoteToLocalStorage(note) {
     }
     notes.push(note)
     localStorage.setItem('noteItem', JSON.stringify(notes))
+
+    // Checks if the input value is empty 
+    if (desc_box.value === '') {
+        notes.splice(note, 1)
+        localStorage.setItem('noteItem', JSON.stringify(notes))
+        message.style.display = 'block'
+        setTimeout(() => {
+            message.style.display = 'none'
+        }, 3000)
+    }
 }
 
 // Function update the DOM from local storage 
