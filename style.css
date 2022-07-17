@@ -1,0 +1,28 @@
+* {
+    font-family: 'Poppins';
+}
+
+#delete_btn {
+    padding: auto 1rem;
+}
+
+.card-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.card {
+    padding: 1rem;
+    transition: all 300ms ease-in;
+}
+
+.removeNote {
+    opacity: 0;
+    transform: translateY(10rem);
+}
+
+.message {
+    display: none;
+}
