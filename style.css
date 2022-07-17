@@ -26,3 +26,20 @@
 .message {
     display: none;
 }
+
+.deleteBtn {
+    background: #dd0531;
+    color: white;
+    padding: 0.25rem;
+    width: 2rem;
+    border: none;
+    border-radius: 10%;
+}
+
+/* // delete card styling
+card_delete_btn.style.background='#dd0531'
+card_delete_btn.style.color='#fff'
+card_delete_btn.style.padding='.25rem'
+card_delete_btn.style.width='2rem'
+card_delete_btn.style.border='none'
+card_delete_btn.style.borderRadius='10%' */

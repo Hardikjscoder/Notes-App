@@ -4,12 +4,29 @@ const add_btn = document.getElementById('add_note')
 const card_container = document.querySelector('.card-container')
 const clear_btn = document.getElementById('clear_note')
 const message = document.querySelector('.message')
+const search = document.getElementById('searchTxt')
 
 // Event Listeners
 add_btn.addEventListener('click', addNote)
 card_container.addEventListener('click', deleteNote)
 document.addEventListener('DOMContentLoaded', updateDOM)
 clear_btn.addEventListener('click', clearNotes)
+
+// Event to filter the notes
+search.addEventListener('input', () => {
+    let searchValLowerCase = search.value.toLowerCase()
+    let card_child = card_container.children
+
+    Array.from(card_child).forEach(card => {
+        let cardTxt = card.getElementsByTagName("p")[0].innerHTML.toLowerCase()
+        if (cardTxt.includes(searchValLowerCase)) {
+            card.style.display = "block"
+        }
+        else {
+            card.style.display = "none"
+        }
+    })
+})
 
 // *********** Functions *********
 
@@ -32,11 +49,8 @@ function addNote() {
     saveNoteToLocalStorage(desc_box.value)
     // Create card delete icon / button
     const card_delete_btn = document.createElement('button')
-    card_delete_btn.classList.add('btn-danger')
-    // delete card styling
-    card_delete_btn.style.background = '#dd0531'
-    card_delete_btn.style.color = '#fff'
-    card_delete_btn.style.padding = '.25rem'
+    card_delete_btn.classList.add('btn-danger', 'deleteBtn')
+
     card_delete_btn.innerHTML = '<i class="fa-solid fa-trash"></i>'
     card_div.appendChild(card_delete_btn)
 
@@ -115,11 +129,8 @@ function updateDOM() {
         card_div.appendChild(card_text)
 
         const card_delete_btn = document.createElement('button')
-        card_delete_btn.classList.add('btn-danger')
+        card_delete_btn.classList.add('btn-danger', 'deleteBtn')
 
-        card_delete_btn.style.background = '#dd0531'
-        card_delete_btn.style.color = '#fff'
-        card_delete_btn.style.padding = '.25rem'
         card_delete_btn.innerHTML = '<i class="fa-solid fa-trash"></i>'
         card_div.appendChild(card_delete_btn)
 
