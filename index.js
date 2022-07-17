@@ -2,11 +2,18 @@
 const desc_box = document.getElementById('desc_box')
 const add_btn = document.getElementById('add_note')
 const card_container = document.querySelector('.card-container')
+const clear_btn = document.getElementById('clear_note')
 
 // Event Listeners
 add_btn.addEventListener('click', addNote)
 card_container.addEventListener('click', deleteNote)
 document.addEventListener('DOMContentLoaded', updateDOM)
+document.addEventListener('keydown', event => {
+    if (event.key === 'Enter') {
+        addNote()
+    }
+})
+clear_btn.addEventListener('click', clearNotes)
 
 // *********** Functions *********
 
@@ -122,4 +129,10 @@ function removeNoteToLocalStorage(note) {
     const noteIndex = note.children[0].innerHTML
     notes.splice(notes.indexOf(noteIndex), 1)
     localStorage.setItem('noteItem', JSON.stringify(notes))
+}
+
+// Function to clear the notes 
+function clearNotes() {
+    card_container.innerHTML = ''
+    localStorage.clear()
 }
