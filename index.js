@@ -67,11 +67,13 @@ function addNote() {
 // Function to delete note 
 function deleteNote(e) {
     const note = e.target
-    // console.log(note)
     if (note.classList[0] === 'btn-danger') {
         const note_card = note.parentNode
-        note_card.classList.add('removeNote')
-        removeNoteToLocalStorage(note)
+        const confirmMsg = confirm('Are you sure that you want to delete the note?')
+        if (confirmMsg === true) {
+            note_card.classList.add('removeNote')
+            removeNoteToLocalStorage(note)
+        }
 
         note_card.addEventListener('transitionend', () => {
             note_card.remove()
