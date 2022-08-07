@@ -155,6 +155,34 @@ function removeNoteToLocalStorage(note) {
     localStorage.setItem('noteItem', JSON.stringify(notes))
 }
 
+// Case conversion
+
+const uppercase_conversion = () => {
+    let desc_boxValue = desc_box.value
+    let upperCase = desc_boxValue.toUpperCase()
+    desc_box.value = upperCase
+}
+
+const lowercase_conversion = () => {
+    let desc_boxValue = desc_box.value
+    let lowerCase = desc_boxValue.toLowerCase()
+    desc_box.value = lowerCase
+}
+
+const titlecase_conversion = () => {
+    let desc_boxValue = desc_box.value
+    let desc_boxValueSplit = desc_boxValue.split(' ')
+    let word = ' '
+    desc_boxValueSplit.forEach(element => [
+        word += element.charAt(0).toUpperCase() + element.slice(1) + ' '
+    ])
+    desc_box.value = word
+}
+
+const reset = () => {
+    return desc_box.value = ''
+}
+
 // Function to clear the notes 
 function clearNotes() {
     card_container.innerHTML = ''
